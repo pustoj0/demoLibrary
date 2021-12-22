@@ -43,6 +43,8 @@ public class MessengerPlatformCallbackHandler {
         try {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(payload);
+            JsonNode node = root.path("text");
+            System.out.println(node.toString());
             System.out.println(root.toPrettyString());
             return ResponseEntity.ok("Everythingn is ok");
         } catch (JsonProcessingException e) {
