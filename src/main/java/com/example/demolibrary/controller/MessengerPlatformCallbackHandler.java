@@ -43,10 +43,10 @@ public class MessengerPlatformCallbackHandler {
         try {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(payload);
-            JsonNode node = root.path("text");
-            System.out.println(node.toString());
-            System.out.println(root.toPrettyString());
-            return ResponseEntity.ok("Everythingn is ok");
+            JsonNode idNode = root.findPath("id");
+            JsonNode messageNode = root.findPath("text");
+            System.out.println(idNode.toString());
+            return myMessenger.send(idNode.asText(), messageNode.asText());
         } catch (JsonProcessingException e) {
             logger.warn("Processing of callback payload failed: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
