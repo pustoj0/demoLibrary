@@ -4,6 +4,8 @@ import com.example.demolibrary.exception.MessengerVerificationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.http.*;
+
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +65,10 @@ public final class MyMessenger {
         messageNode.put("text", message);
         rootNode.put("message", messageNode);
         System.out.println(rootNode.toPrettyString());
-        return ResponseEntity.status(HttpStatus.OK).headers(headers).body(rootNode.asText());
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .headers(headers)
+                .location(URI.create(messagesRequestURI))
+                .body(rootNode.asText());
     }
 }
