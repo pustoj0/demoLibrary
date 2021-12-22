@@ -16,6 +16,13 @@ public class DemoLibraryApplication {
         return Messenger.create(pageAccessToken, appSecret, verifyToken);
     }
 
+    @Bean
+    public MyMessenger myMessenger(@Value("${messenger4j.pageAccessToken}") String pageAccessToken,
+                                   @Value("${messenger4j.appSecret}") final String appSecret,
+                                   @Value("${messenger4j.verifyToken}") final String verifyToken) {
+        return MyMessenger.create(pageAccessToken, appSecret, verifyToken);
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(DemoLibraryApplication.class, args);
     }
