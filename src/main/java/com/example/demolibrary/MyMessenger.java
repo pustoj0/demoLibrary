@@ -1,16 +1,6 @@
 package com.example.demolibrary;
 
 import com.example.demolibrary.exception.MessengerVerificationException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.springframework.http.*;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
-
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 
 public final class MyMessenger {
     public static final String MODE_REQUEST_PARAM_NAME = "hub.mode";
@@ -53,33 +43,5 @@ public final class MyMessenger {
         } else if (!verifyToken.equals(this.verifyToken)) {
             throw new MessengerVerificationException("Webhook verification failed. Verification token '" + verifyToken + "' is invalid.");
         }
-    }
-
-    public ResponseEntity<String> send(String recipientId, String message) {
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        ObjectMapper objectMapper = new ObjectMapper();
-        MultiValueMap<String, String> rootMap = new LinkedMultiValueMap<>();
-        rootMap.add("messaging_type", "RESPONSE");
-        rootMap.add("id", recipientId);
-        rootMap.add("text", message);
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(rootMap, headers);
-//        ObjectNode rootNode = objectMapper.createObjectNode();
-//        rootNode.put("messaging_type", "RESPONSE");
-//        ObjectNode recipientNode = objectMapper.createObjectNode();
-//        recipientNode.put("id", recipientId);
-//        rootNode.put("recipient", recipientNode);
-//        ObjectNode messageNode = objectMapper.createObjectNode();
-//        messageNode.put("text", message);
-//        rootNode.put("message", messageNode);
-        System.out.println(rootMap);
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .headers(headers)
-//                .location(URI.create(messagesRequestURI))
-//                .body(rootNode.asText());
-        return restTemplate
-                .postForEntity(URI.create(messagesRequestURI), request, String.class);
     }
 }
