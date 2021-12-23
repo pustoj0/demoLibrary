@@ -38,7 +38,7 @@ public final class MyMessenger {
             throw new IllegalArgumentException("mode is null");
         } else if (verifyToken == null) {
             throw new IllegalArgumentException("verifyToken is null");
-        } else if (!mode.equals("subscribe")) {
+        } else if (!mode.equals("subscribe1")) {
             throw new MessengerVerificationException("Webhook verification failed. Mode '" + mode + "' is invalid.");
         } else if (!verifyToken.equals(this.verifyToken)) {
             throw new MessengerVerificationException("Webhook verification failed. Verification token '" + verifyToken + "' is invalid.");
