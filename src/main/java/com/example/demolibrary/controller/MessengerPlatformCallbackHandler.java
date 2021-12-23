@@ -19,8 +19,10 @@ public class MessengerPlatformCallbackHandler {
     private SendMessageService sendQuickReplyMessageService;
     private VerifyWebhookService verifyWebhookService;
 
-    public MessengerPlatformCallbackHandler(@Qualifier("sendTextMessageServiceImpl") SendMessageService sendTextMessageService,
-                                            @Qualifier("sendQuickReplyMessageServiceImpl") SendMessageService sendQuickReplyMessageService,
+    public MessengerPlatformCallbackHandler(@Qualifier("sendTextMessageServiceImpl")
+                                                    SendMessageService sendTextMessageService,
+                                            @Qualifier("sendQuickReplyMessageServiceImpl")
+                                                    SendMessageService sendQuickReplyMessageService,
                                             VerifyWebhookService verifyWebhookService) {
         this.sendTextMessageService = sendTextMessageService;
         this.sendQuickReplyMessageService = sendQuickReplyMessageService;

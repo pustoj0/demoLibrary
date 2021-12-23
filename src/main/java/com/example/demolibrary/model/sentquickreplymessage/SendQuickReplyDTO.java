@@ -34,5 +34,14 @@ public class SendQuickReplyDTO {
     public void setMessage(Message message) {
         this.message = message;
     }
+
+    @Override
+    public String toString() {
+        return "SendQuickReplyDTO{" +
+                "recipient=" + recipient +
+                ", messaging_type='" + messaging_type + '\'' +
+                ", message=" + message +
+                '}';
+    }
 }
 

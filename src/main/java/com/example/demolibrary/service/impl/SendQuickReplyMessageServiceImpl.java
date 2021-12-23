@@ -58,7 +58,7 @@ public class SendQuickReplyMessageServiceImpl implements SendMessageService {
                                     ResponseEntity<QuickReplyResponseDTO> responseEntity
                                             = restTemplate.exchange(messenger.getMessagesRequestURI(),
                                             HttpMethod.POST, entity, QuickReplyResponseDTO.class);
-                                    logger.info(Objects.requireNonNull(responseEntity.getBody()).getMessage_id());
+                                    logger.info(responseEntity.toString());
                                 }
                             });
                 });
