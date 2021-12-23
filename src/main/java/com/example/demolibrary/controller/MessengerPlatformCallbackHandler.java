@@ -45,8 +45,7 @@ public class MessengerPlatformCallbackHandler {
             JsonNode root = mapper.readTree(payload);
             JsonNode idNode = root.findPath("id");
             JsonNode messageNode = root.findPath("text");
-            System.out.println(idNode.toPrettyString());
-            System.out.println(messageNode.toPrettyString());
+            System.out.println(root.toPrettyString());
             return ResponseEntity.ok("Good");
         } catch (JsonProcessingException e) {
             logger.warn("Processing of callback payload failed: {}", e.getMessage());
