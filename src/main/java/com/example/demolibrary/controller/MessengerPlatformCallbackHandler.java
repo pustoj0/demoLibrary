@@ -39,7 +39,7 @@ public class MessengerPlatformCallbackHandler {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<String> handleCallback(@RequestBody final String payload,
                                                @RequestHeader(SIGNATURE_HEADER_NAME) final String signature) {
-        logger.debug("Received Messenger Platform callback - payload: {} | signature: {}", payload, signature);
+        logger.info("Received Messenger Platform callback - payload: {} | signature: {}", payload, signature);
         try {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(payload);
