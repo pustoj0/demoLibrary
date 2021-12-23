@@ -1,12 +1,9 @@
 package com.example.demolibrary.service.impl;
 
-
 import com.example.demolibrary.MyMessenger;
-import com.example.demolibrary.controller.MessengerPlatformCallbackHandler;
 import com.example.demolibrary.model.ContentType;
 import com.example.demolibrary.model.MessagingType;
 import com.example.demolibrary.model.receivedmessage.MessagePayloadDTO;
-import com.example.demolibrary.model.sentmessage.SendMessageDTO;
 import com.example.demolibrary.model.sentquickreplymessage.*;
 import com.example.demolibrary.service.SendMessageService;
 import org.slf4j.Logger;
@@ -17,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class SendQuickReplyMessageServiceImpl implements SendMessageService {
@@ -55,8 +51,10 @@ public class SendQuickReplyMessageServiceImpl implements SendMessageService {
                                     SendQuickReplyDTO sendQuickReplyDTO = new SendQuickReplyDTO(recipient,
                                             MessagingType.RESPONSE.name(), message);
                                     HttpEntity<SendQuickReplyDTO> entity = new HttpEntity<>(sendQuickReplyDTO, headers);
-                                    restTemplate.exchange(messenger.getMessagesRequestURI(),
+                                    ResponseEntity<QuickReplyResponseDTO> responseEntity
+                                            = restTemplate.exchange(messenger.getMessagesRequestURI(),
                                             HttpMethod.POST, entity, QuickReplyResponseDTO.class);
+                                    System.out.println(responseEntity);
                                 }
                             });
                 });
