@@ -1,7 +1,11 @@
-package com.example.demolibrary.model.textmessage;
+package com.example.demolibrary.model.sentmessage;
 
 public class Message {
     private String text;
+
+    public Message(String text) {
+        this.text = text;
+    }
 
     public String getText() {
         return text;

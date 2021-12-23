@@ -4,6 +4,8 @@ public class Message {
     public String mid;
     public String text;
 
+
+
     public String getMid() {
         return mid;
     }

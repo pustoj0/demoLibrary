@@ -4,9 +4,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class DemoLibraryApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(DemoLibraryApplication.class, args);
+    }
 
     @Bean
     public MyMessenger myMessenger(@Value("${messenger4j.pageAccessToken}") String pageAccessToken,
@@ -15,8 +19,8 @@ public class DemoLibraryApplication {
         return MyMessenger.create(pageAccessToken, appSecret, verifyToken);
     }
 
-    public static void main(String[] args) {
-        SpringApplication.run(DemoLibraryApplication.class, args);
+    @Bean
+    public RestTemplate getRestTemlate() {
+        return new RestTemplate();
     }
-
 }

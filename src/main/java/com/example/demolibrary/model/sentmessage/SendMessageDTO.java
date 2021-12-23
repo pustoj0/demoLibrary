@@ -1,11 +1,15 @@
-package com.example.demolibrary.model.textmessage;
-
-import java.io.Serializable;
+package com.example.demolibrary.model.sentmessage;
 
 public class SendMessageDTO {
     private String messaging_type;
     private Recipient recipient;
     private Message message;
+
+    public SendMessageDTO(String messaging_type, Recipient recipient, Message message) {
+        this.messaging_type = messaging_type;
+        this.recipient = recipient;
+        this.message = message;
+    }
 
     public String getMessaging_type() {
         return messaging_type;
