@@ -2,7 +2,7 @@ package com.example.demolibrary.model.textmessage;
 
 import java.io.Serializable;
 
-public class TextMessageModel implements Serializable {
+public class SendMessageDTO {
     private String messaging_type;
     private Recipient recipient;
     private Message message;
@@ -31,3 +31,4 @@ public class TextMessageModel implements Serializable {
         this.message = message;
     }
 }
+

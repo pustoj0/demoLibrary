@@ -1,7 +1,7 @@
-package com.example.demolibrary.model.textmessage;
+package com.example.demolibrary.model.receivedmessage;
 
 public class Recipient {
-    private String id;
+    public String id;
 
     public String getId() {
         return id;

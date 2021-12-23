@@ -1,8 +1,6 @@
 package com.example.demolibrary.model.textmessage;
 
-import java.io.Serializable;
-
-public class Message implements Serializable {
+public class Message {
     private String text;
 
     public String getText() {

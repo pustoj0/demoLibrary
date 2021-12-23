@@ -13,13 +13,28 @@ public final class MyMessenger {
     private final String verifyToken;
     private final String messagesRequestURI;
 
-
     public MyMessenger(String pageAccessToken, String appSecret, String verifyToken) {
         this.pageAccessToken = pageAccessToken;
         this.appSecret = appSecret;
         this.verifyToken = verifyToken;
         this.messagesRequestURI = String.format("https://graph.facebook.com/v12.0/me/messages?access_token=%s",
                 pageAccessToken);
+    }
+
+    public String getPageAccessToken() {
+        return pageAccessToken;
+    }
+
+    public String getAppSecret() {
+        return appSecret;
+    }
+
+    public String getVerifyToken() {
+        return verifyToken;
+    }
+
+    public String getMessagesRequestURI() {
+        return messagesRequestURI;
     }
 
     public static MyMessenger create(String pageAccessToken, String appSecret, String verifyToken) {
