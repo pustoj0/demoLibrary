@@ -23,12 +23,11 @@ public class SendQuickReplyMessageServiceImpl implements SendMessageService {
 
     private RestTemplate restTemplate;
     private MyMessenger messenger;
-    private SendSenderActionService actionService;
 
-    public SendQuickReplyMessageServiceImpl(RestTemplate restTemplate, MyMessenger messenger, SendSenderActionService actionService) {
+    public SendQuickReplyMessageServiceImpl(RestTemplate restTemplate, MyMessenger messenger) {
         this.restTemplate = restTemplate;
         this.messenger = messenger;
-        this.actionService = actionService;
+
     }
     @Override
     public void sendMessage(MessagePayloadDTO messagePayloadDTO) {
@@ -56,7 +55,7 @@ public class SendQuickReplyMessageServiceImpl implements SendMessageService {
                                             MessagingType.RESPONSE.name(), message);
                                     HttpEntity<SendQuickReplyDTO> entity = new HttpEntity<>(sendQuickReplyDTO, headers);
                                     restTemplate.exchange(messenger.getMessagesRequestURI(),
-                                            HttpMethod.POST, entity, MessagePostbackDTO.class);
+                                            HttpMethod.POST, entity, Void.class);
 
                                 }
                             });
