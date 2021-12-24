@@ -1,9 +1,7 @@
 package com.example.demolibrary.controller;
 
 import com.example.demolibrary.exception.MessengerVerificationException;
-import com.example.demolibrary.model.messagepostback.MessagePostbackDTO;
 import com.example.demolibrary.service.SendMessageService;
-import com.example.demolibrary.service.SendSenderActionService;
 import com.example.demolibrary.service.VerifyWebhookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
