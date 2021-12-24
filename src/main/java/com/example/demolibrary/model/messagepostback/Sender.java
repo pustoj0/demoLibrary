@@ -1,20 +1,20 @@
 package com.example.demolibrary.model.messagepostback;
 
 public class Sender {
-    public String id;
+    public String user_ref;
 
-    public String getId() {
-        return id;
+    public String getUser_ref() {
+        return user_ref;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUser_ref(String user_ref) {
+        this.user_ref = user_ref;
     }
 
     @Override
     public String toString() {
         return "Sender{" +
-                "id='" + id + '\'' +
+                "user_ref='" + user_ref + '\'' +
                 '}';
     }
 }

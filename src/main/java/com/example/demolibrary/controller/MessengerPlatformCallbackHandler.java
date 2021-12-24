@@ -1,6 +1,7 @@
 package com.example.demolibrary.controller;
 
 import com.example.demolibrary.exception.MessengerVerificationException;
+import com.example.demolibrary.model.messagepostback.MessagePostbackDTO;
 import com.example.demolibrary.service.SendMessageService;
 import com.example.demolibrary.service.VerifyWebhookService;
 import org.slf4j.Logger;
@@ -48,6 +49,14 @@ public class MessengerPlatformCallbackHandler {
                                                  @RequestHeader(SIGNATURE_HEADER_NAME) final String signature) {
         logger.info("Received Messenger Platform callback - payload: {} | signature: {}", messagePayloadDTO, signature);
         sendQuickReplyMessageService.sendMessage(messagePayloadDTO);
+        return ResponseEntity.ok("Message was sent");
+    }
+
+    @PostMapping
+    public ResponseEntity<String> handleCallback(@RequestBody MessagePostbackDTO messagePayloadDTO,
+                                                 @RequestHeader(SIGNATURE_HEADER_NAME) final String signature) {
+        logger.info("Received Messenger Platform callback - payload: {} | signature: {}", messagePayloadDTO, signature);
+        System.out.println(messagePayloadDTO);
         return ResponseEntity.ok("Message was sent");
     }
 }
