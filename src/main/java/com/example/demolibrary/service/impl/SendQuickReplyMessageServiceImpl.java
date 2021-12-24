@@ -5,6 +5,8 @@ import com.example.demolibrary.model.ContentType;
 import com.example.demolibrary.model.MessagingType;
 import com.example.demolibrary.model.messagepostback.MessagePostbackDTO;
 import com.example.demolibrary.model.receivedmessage.MessagePayloadDTO;
+import com.example.demolibrary.model.senderaction.SenderActionDTO;
+import com.example.demolibrary.model.senderaction.SenderActionType;
 import com.example.demolibrary.model.sentquickreplymessage.*;
 import com.example.demolibrary.service.SendMessageService;
 import org.slf4j.Logger;
@@ -15,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class SendQuickReplyMessageServiceImpl implements SendMessageService {
@@ -49,13 +52,27 @@ public class SendQuickReplyMessageServiceImpl implements SendMessageService {
                                     quickReplies.add(quickReply1);
                                     quickReplies.add(quickReply2);
                                     Message message = new Message(messageText, quickReplies);
+                                    SenderActionDTO senderActionDTO = new SenderActionDTO(
+                                            new com.example.demolibrary.model.senderaction.Recipient(senderId),
+                                            SenderActionType.typing_on.name());
+                                    HttpEntity<SenderActionDTO> senderActionDTOHttpEntity = new HttpEntity<>(senderActionDTO, headers);
+                                    restTemplate.exchange(messenger.getMessagesRequestURI(),
+                                            HttpMethod.POST, senderActionDTOHttpEntity, Void.class);
+                                    try {
+                                        TimeUnit.SECONDS.sleep(2);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    senderActionDTO.setSender_action(SenderActionType.typing_off.name());
+                                    senderActionDTOHttpEntity = new HttpEntity<>(senderActionDTO, headers);
+                                    restTemplate.exchange(messenger.getMessagesRequestURI(),
+                                            HttpMethod.POST, senderActionDTOHttpEntity, Void.class);
                                     SendQuickReplyDTO sendQuickReplyDTO = new SendQuickReplyDTO(recipient,
                                             MessagingType.RESPONSE.name(), message);
                                     HttpEntity<SendQuickReplyDTO> entity = new HttpEntity<>(sendQuickReplyDTO, headers);
-                                    ResponseEntity<MessagePostbackDTO> responseEntity
-                                            = restTemplate.exchange(messenger.getMessagesRequestURI(),
+                                    restTemplate.exchange(messenger.getMessagesRequestURI(),
                                             HttpMethod.POST, entity, MessagePostbackDTO.class);
-                                    logger.info(responseEntity.toString());
+
                                 }
                             });
                 });
