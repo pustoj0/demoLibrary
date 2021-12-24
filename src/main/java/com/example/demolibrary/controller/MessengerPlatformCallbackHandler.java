@@ -50,9 +50,11 @@ public class MessengerPlatformCallbackHandler {
     public ResponseEntity<String> handleCallback(@RequestBody MessagePayloadDTO messagePayloadDTO,
                                                  @RequestHeader(SIGNATURE_HEADER_NAME) final String signature) {
         logger.info("Received Messenger Platform callback - payload: {} | signature: {}", messagePayloadDTO, signature);
+        actionService.sendSenderAction(messagePayloadDTO);
         sendTextMessageService.sendMessage(messagePayloadDTO);
         actionService.sendSenderAction(messagePayloadDTO);
         sendTextMessageService.sendMessage(messagePayloadDTO);
+        actionService.sendSenderAction(messagePayloadDTO);
         return ResponseEntity.ok("Message was sent");
     }
 }
