@@ -39,9 +39,8 @@ public class SendTextMessageServiceImpl implements SendMessageService {
                                 String messageText = messaging.getMessage().getText();
                                 Recipient recipient = new Recipient(senderId);
                                 Message message = new Message(messageText);
-                                String sender_action = SenderActionType.typing_on.name();
                                 SendMessageDTO sendMessageDTO
-                                        = new SendMessageDTO(MessagingType.RESPONSE.name(), recipient, message, sender_action);
+                                        = new SendMessageDTO(MessagingType.RESPONSE.name(), recipient, message);
                                 HttpEntity<SendMessageDTO> entity = new HttpEntity<>(sendMessageDTO, headers);
                                 restTemplate.exchange(messenger.getMessagesRequestURI(),
                                         HttpMethod.POST, entity, Void.class);
