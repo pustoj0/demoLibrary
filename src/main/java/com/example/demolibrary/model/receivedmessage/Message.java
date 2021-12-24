@@ -4,8 +4,6 @@ public class Message {
     public String mid;
     public String text;
 
-
-
     public String getMid() {
         return mid;
     }
@@ -20,5 +18,13 @@ public class Message {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "mid='" + mid + '\'' +
+                ", text='" + text + '\'' +
+                '}';
     }
 }

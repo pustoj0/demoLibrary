@@ -37,4 +37,14 @@ public class Messaging {
     public void setMessage(Message message) {
         this.message = message;
     }
+
+    @Override
+    public String toString() {
+        return "Messaging{" +
+                "sender=" + sender +
+                ", recipient=" + recipient +
+                ", timestamp=" + timestamp +
+                ", message=" + message +
+                '}';
+    }
 }

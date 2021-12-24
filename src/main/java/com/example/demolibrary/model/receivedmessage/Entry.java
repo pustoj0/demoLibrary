@@ -30,4 +30,13 @@ public class Entry {
     public void setMessaging(List<Messaging> messaging) {
         this.messaging = messaging;
     }
+
+    @Override
+    public String toString() {
+        return "Entry{" +
+                "id='" + id + '\'' +
+                ", time=" + time +
+                ", messaging=" + messaging +
+                '}';
+    }
 }

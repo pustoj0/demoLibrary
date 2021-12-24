@@ -10,4 +10,11 @@ public class Sender {
     public void setId(String id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Sender{" +
+                "id='" + id + '\'' +
+                '}';
+    }
 }

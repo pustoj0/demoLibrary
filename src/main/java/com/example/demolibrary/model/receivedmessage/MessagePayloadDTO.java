@@ -21,5 +21,13 @@ public class MessagePayloadDTO {
     public void setEntry(List<Entry> entry) {
         this.entry = entry;
     }
+
+    @Override
+    public String toString() {
+        return "MessagePayloadDTO{" +
+                "object='" + object + '\'' +
+                ", entry=" + entry +
+                '}';
+    }
 }
 

@@ -7,6 +7,8 @@ import com.example.demolibrary.model.sentmessage.Message;
 import com.example.demolibrary.model.sentmessage.Recipient;
 import com.example.demolibrary.model.sentmessage.SendMessageDTO;
 import com.example.demolibrary.service.SendMessageService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -28,6 +30,7 @@ public class SendTextMessageServiceImpl implements SendMessageService {
     public void sendMessage(MessagePayloadDTO messagePayloadDTO) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        System.out.println(messagePayloadDTO);
         messagePayloadDTO
                 .getEntry()
                 .forEach(entry -> {
