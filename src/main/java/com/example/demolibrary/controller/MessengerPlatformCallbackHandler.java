@@ -49,7 +49,7 @@ public class MessengerPlatformCallbackHandler {
     public ResponseEntity<String> handleCallback(@RequestBody MessagePayloadDTO messagePayloadDTO,
                                                  @RequestHeader(SIGNATURE_HEADER_NAME) final String signature) {
         logger.info("Received Messenger Platform callback - payload: {} | signature: {}", messagePayloadDTO, signature);
-        sendQuickReplyMessageService.sendMessage(messagePayloadDTO);
+        sendTextMessageService.sendMessage(messagePayloadDTO);
         return ResponseEntity.ok("Message was sent");
     }
 }
