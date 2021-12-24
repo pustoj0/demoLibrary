@@ -6,6 +6,10 @@ public class QuickReply {
     public String payload;
     public String image_url;
 
+    public QuickReply(String content_type) {
+        this.content_type = content_type;
+    }
+
     public QuickReply(String content_type, String title, String payload, String image_url) {
         this.content_type = content_type;
         this.title = title;

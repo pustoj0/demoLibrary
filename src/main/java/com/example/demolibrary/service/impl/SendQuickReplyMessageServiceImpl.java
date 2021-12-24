@@ -43,13 +43,13 @@ public class SendQuickReplyMessageServiceImpl implements SendMessageService {
                                 if (text.equals("Ukraine")) {
                                     String messageText = "Choose Country";
                                     Recipient recipient = new Recipient(senderId);
-                                    QuickReply quickReply1 = new QuickReply(ContentType.text.name(),
-                                            "Ukraine", "1111111111", "");
-                                    QuickReply quickReply2 = new QuickReply(ContentType.text.name(),
-                                            "Italy", "2222222222", "");
+                                    QuickReply quickReply1 = new QuickReply(ContentType.user_phone_number.name());
+//                                           ,"Ukraine", "1111111111", "");
+//                                    QuickReply quickReply2 = new QuickReply(ContentType.text.name(),
+//                                            "Italy", "2222222222", "");
                                     List<QuickReply> quickReplies = new ArrayList<>();
                                     quickReplies.add(quickReply1);
-                                    quickReplies.add(quickReply2);
+//                                    quickReplies.add(quickReply2);
                                     Message message = new Message(messageText, quickReplies);
                                     SendQuickReplyDTO sendQuickReplyDTO = new SendQuickReplyDTO(recipient,
                                             MessagingType.RESPONSE.name(), message);
