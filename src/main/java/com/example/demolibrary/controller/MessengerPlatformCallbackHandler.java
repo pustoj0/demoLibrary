@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import com.example.demolibrary.model.receivedmessage.*;
+
+import java.util.concurrent.TimeUnit;
+
 import static com.example.demolibrary.MyMessenger.*;
 
 @RestController
@@ -51,10 +54,12 @@ public class MessengerPlatformCallbackHandler {
                                                  @RequestHeader(SIGNATURE_HEADER_NAME) final String signature) {
         logger.info("Received Messenger Platform callback - payload: {} | signature: {}", messagePayloadDTO, signature);
         actionService.sendSenderAction(messagePayloadDTO);
+        try {
+            TimeUnit.SECONDS.sleep(4);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         sendTextMessageService.sendMessage(messagePayloadDTO);
-        actionService.sendSenderAction(messagePayloadDTO);
-        sendTextMessageService.sendMessage(messagePayloadDTO);
-        actionService.sendSenderAction(messagePayloadDTO);
         return ResponseEntity.ok("Message was sent");
     }
 }
