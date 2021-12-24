@@ -3,6 +3,7 @@ package com.example.demolibrary.service.impl;
 import com.example.demolibrary.MyMessenger;
 import com.example.demolibrary.model.ContentType;
 import com.example.demolibrary.model.MessagingType;
+import com.example.demolibrary.model.messagepostback.MessagePostbackDTO;
 import com.example.demolibrary.model.receivedmessage.MessagePayloadDTO;
 import com.example.demolibrary.model.sentquickreplymessage.*;
 import com.example.demolibrary.service.SendMessageService;
@@ -41,9 +42,9 @@ public class SendQuickReplyMessageServiceImpl implements SendMessageService {
                                     String messageText = "Choose Country";
                                     Recipient recipient = new Recipient(senderId);
                                     QuickReply quickReply1 = new QuickReply(ContentType.text.name(),
-                                            "Ukraine", "1", "");
+                                            "Ukraine", "1111111111", "");
                                     QuickReply quickReply2 = new QuickReply(ContentType.text.name(),
-                                            "Italy", "2", "");
+                                            "Italy", "2222222222", "");
                                     List<QuickReply> quickReplies = new ArrayList<>();
                                     quickReplies.add(quickReply1);
                                     quickReplies.add(quickReply2);
@@ -51,10 +52,10 @@ public class SendQuickReplyMessageServiceImpl implements SendMessageService {
                                     SendQuickReplyDTO sendQuickReplyDTO = new SendQuickReplyDTO(recipient,
                                             MessagingType.RESPONSE.name(), message);
                                     HttpEntity<SendQuickReplyDTO> entity = new HttpEntity<>(sendQuickReplyDTO, headers);
-                                    ResponseEntity<QuickReplyResponseDTO> responseEntity
+                                    ResponseEntity<MessagePostbackDTO> responseEntity
                                             = restTemplate.exchange(messenger.getMessagesRequestURI(),
-                                            HttpMethod.POST, entity, QuickReplyResponseDTO.class);
-                                    logger.info(responseEntity.toString());
+                                            HttpMethod.POST, entity, MessagePostbackDTO.class);
+                                    logger.info(responseEntity.getBody().toString());
                                 }
                             });
                 });
