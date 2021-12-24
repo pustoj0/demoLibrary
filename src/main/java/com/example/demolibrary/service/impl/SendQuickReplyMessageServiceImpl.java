@@ -56,7 +56,7 @@ public class SendQuickReplyMessageServiceImpl implements SendMessageService {
                                             new com.example.demolibrary.model.senderaction.Recipient(senderId),
                                             SenderActionType.typing_on.name());
                                     HttpEntity<SenderActionDTO> senderActionDTOHttpEntity = new HttpEntity<>(senderActionDTO, headers);
-                                    restTemplate.exchange(messenger.getMessagesRequestURI(),
+                                    restTemplate.exchange("https://graph.facebook.com/v2.6/me/messages?access_token=" + messenger.getVerifyToken(),
                                             HttpMethod.POST, senderActionDTOHttpEntity, Void.class);
                                     try {
                                         TimeUnit.SECONDS.sleep(2);
@@ -65,7 +65,7 @@ public class SendQuickReplyMessageServiceImpl implements SendMessageService {
                                     }
                                     senderActionDTO.setSender_action(SenderActionType.typing_off.name());
                                     senderActionDTOHttpEntity = new HttpEntity<>(senderActionDTO, headers);
-                                    restTemplate.exchange(messenger.getMessagesRequestURI(),
+                                    restTemplate.exchange("https://graph.facebook.com/v2.6/me/messages?access_token=" + messenger.getVerifyToken(),
                                             HttpMethod.POST, senderActionDTOHttpEntity, Void.class);
                                     SendQuickReplyDTO sendQuickReplyDTO = new SendQuickReplyDTO(recipient,
                                             MessagingType.RESPONSE.name(), message);
