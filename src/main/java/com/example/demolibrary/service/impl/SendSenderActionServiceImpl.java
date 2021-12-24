@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class SendSenderActionServiceImpl implements SendSenderActionService {
 
-    private static final Logger logger = LoggerFactory.getLogger(SendQuickReplyMessageServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(SendSenderActionServiceImpl.class);
 
     private RestTemplate restTemplate;
     private MyMessenger messenger;
@@ -31,6 +31,7 @@ public class SendSenderActionServiceImpl implements SendSenderActionService {
 
     @Override
     public void sendSenderAction(String senderId) {
+        logger.info("MARKMARKMARK");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         SenderActionDTO senderActionDTO = new SenderActionDTO(
