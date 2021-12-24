@@ -50,14 +50,6 @@ public class SendSenderActionServiceImpl implements SendSenderActionService {
                                 HttpEntity<SenderActionDTO> entity = new HttpEntity<>(senderActionDTO, headers);
                                 restTemplate.exchange(messenger.getMessagesRequestURI(),
                                         HttpMethod.POST, entity, Void.class);
-                                try {
-                                    TimeUnit.SECONDS.sleep(2);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                                entity.getBody().setSender_action(SenderActionType.typing_off.name());
-                                restTemplate.exchange(messenger.getMessagesRequestURI(),
-                                        HttpMethod.POST, entity, Void.class);
                             });
                 });
     }

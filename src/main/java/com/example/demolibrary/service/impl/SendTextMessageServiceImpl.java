@@ -3,7 +3,6 @@ package com.example.demolibrary.service.impl;
 import com.example.demolibrary.MyMessenger;
 import com.example.demolibrary.model.MessagingType;
 import com.example.demolibrary.model.receivedmessage.MessagePayloadDTO;
-import com.example.demolibrary.model.senderaction.SenderActionType;
 import com.example.demolibrary.model.sentmessage.Message;
 import com.example.demolibrary.model.sentmessage.Recipient;
 import com.example.demolibrary.model.sentmessage.SendMessageDTO;
