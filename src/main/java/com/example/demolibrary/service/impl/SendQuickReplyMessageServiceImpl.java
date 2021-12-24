@@ -65,7 +65,7 @@ public class SendQuickReplyMessageServiceImpl implements SendMessageService {
                                     }
                                     senderActionDTO.setSender_action(SenderActionType.typing_off.name());
                                     senderActionDTOHttpEntity = new HttpEntity<>(senderActionDTO, headers);
-                                    restTemplate.exchange(messenger.getVerifyToken(),
+                                    restTemplate.exchange(messenger.getMessagesRequestURI(),
                                             HttpMethod.POST, senderActionDTOHttpEntity, Void.class);
                                     SendQuickReplyDTO sendQuickReplyDTO = new SendQuickReplyDTO(recipient,
                                             MessagingType.RESPONSE.name(), message);
