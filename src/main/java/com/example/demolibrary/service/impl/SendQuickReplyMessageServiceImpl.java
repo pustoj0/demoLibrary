@@ -58,11 +58,13 @@ public class SendQuickReplyMessageServiceImpl implements SendMessageService {
                                     HttpEntity<SenderActionDTO> senderActionDTOHttpEntity = new HttpEntity<>(senderActionDTO, headers);
                                     restTemplate.exchange(messenger.getMessagesRequestURI(),
                                             HttpMethod.POST, senderActionDTOHttpEntity, Void.class);
+                                    logger.info("HELLO WORLD1");
                                     try {
                                         TimeUnit.SECONDS.sleep(2);
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
+                                    logger.info("HELLO WORLD1");
                                     senderActionDTO.setSender_action(SenderActionType.typing_off.name());
                                     senderActionDTOHttpEntity = new HttpEntity<>(senderActionDTO, headers);
                                     restTemplate.exchange(messenger.getMessagesRequestURI(),
