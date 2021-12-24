@@ -3,6 +3,7 @@ package com.example.demolibrary.service.impl;
 import com.example.demolibrary.MyMessenger;
 import com.example.demolibrary.model.MessagingType;
 import com.example.demolibrary.model.receivedmessage.MessagePayloadDTO;
+import com.example.demolibrary.model.senderaction.SenderActionType;
 import com.example.demolibrary.model.sentmessage.Message;
 import com.example.demolibrary.model.sentmessage.Recipient;
 import com.example.demolibrary.model.sentmessage.SendMessageDTO;
@@ -38,8 +39,9 @@ public class SendTextMessageServiceImpl implements SendMessageService {
                                 String messageText = messaging.getMessage().getText();
                                 Recipient recipient = new Recipient(senderId);
                                 Message message = new Message(messageText);
+                                String sender_action = SenderActionType.typing_on.name();
                                 SendMessageDTO sendMessageDTO
-                                        = new SendMessageDTO(MessagingType.RESPONSE.name(), recipient, message);
+                                        = new SendMessageDTO(MessagingType.RESPONSE.name(), recipient, message, sender_action);
                                 HttpEntity<SendMessageDTO> entity = new HttpEntity<>(sendMessageDTO, headers);
                                 restTemplate.exchange(messenger.getMessagesRequestURI(),
                                         HttpMethod.POST, entity, Void.class);
