@@ -28,7 +28,6 @@ public class SendTextMessageServiceImpl implements SendMessageService {
     public void sendMessage(MessagePayloadDTO messagePayloadDTO) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        System.out.println(messagePayloadDTO);
         messagePayloadDTO
                 .getEntry()
                 .forEach(entry -> {

@@ -33,7 +33,6 @@ public class SendSenderActionServiceImpl implements SendSenderActionService {
     public void sendSenderAction(MessagePayloadDTO messagePayloadDTO) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        System.out.println(messagePayloadDTO);
         messagePayloadDTO
                 .getEntry()
                 .forEach(entry -> {
