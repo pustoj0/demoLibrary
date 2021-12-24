@@ -4,6 +4,7 @@ public class SendMessageDTO {
     private String messaging_type;
     private Recipient recipient;
     private Message message;
+    private String sender_action;
 
     public SendMessageDTO(String messaging_type, Recipient recipient, Message message) {
         this.messaging_type = messaging_type;
@@ -33,6 +34,14 @@ public class SendMessageDTO {
 
     public void setMessage(Message message) {
         this.message = message;
+    }
+
+    public String getSender_action() {
+        return sender_action;
+    }
+
+    public void setSender_action(String sender_action) {
+        this.sender_action = sender_action;
     }
 }
 

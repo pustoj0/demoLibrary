@@ -6,8 +6,6 @@ import com.example.demolibrary.model.receivedmessage.MessagePayloadDTO;
 import com.example.demolibrary.model.senderaction.Recipient;
 import com.example.demolibrary.model.senderaction.SenderActionDTO;
 import com.example.demolibrary.model.senderaction.SenderActionType;
-import com.example.demolibrary.model.sentmessage.Message;
-import com.example.demolibrary.model.sentmessage.SendMessageDTO;
 import com.example.demolibrary.service.SendSenderActionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +15,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class SendSenderActionServiceImpl implements SendSenderActionService {
