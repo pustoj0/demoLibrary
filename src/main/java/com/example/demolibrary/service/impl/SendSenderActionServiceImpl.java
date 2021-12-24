@@ -1,9 +1,13 @@
 package com.example.demolibrary.service.impl;
 
 import com.example.demolibrary.MyMessenger;
+import com.example.demolibrary.model.MessagingType;
+import com.example.demolibrary.model.receivedmessage.MessagePayloadDTO;
 import com.example.demolibrary.model.senderaction.Recipient;
 import com.example.demolibrary.model.senderaction.SenderActionDTO;
 import com.example.demolibrary.model.senderaction.SenderActionType;
+import com.example.demolibrary.model.sentmessage.Message;
+import com.example.demolibrary.model.sentmessage.SendMessageDTO;
 import com.example.demolibrary.service.SendSenderActionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,24 +34,31 @@ public class SendSenderActionServiceImpl implements SendSenderActionService {
     }
 
     @Override
-    public void sendSenderAction(String senderId) {
-        logger.info("MARKMARKMARK");
+    public void sendSenderAction(MessagePayloadDTO messagePayloadDTO) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        SenderActionDTO senderActionDTO = new SenderActionDTO(
-                new Recipient(senderId),
-                SenderActionType.typing_on.name());
-        HttpEntity<SenderActionDTO> senderActionDTOHttpEntity
-                = new HttpEntity<>(senderActionDTO, headers);
-        restTemplate.exchange(messenger.getMessagesRequestURI(),
-                HttpMethod.POST, senderActionDTOHttpEntity, Void.class);
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        senderActionDTOHttpEntity.getBody().setSender_action(SenderActionType.typing_off.name());
-        restTemplate.exchange(messenger.getMessagesRequestURI(),
-                HttpMethod.POST, senderActionDTOHttpEntity, Void.class);
+        System.out.println(messagePayloadDTO);
+        messagePayloadDTO
+                .getEntry()
+                .forEach(entry -> {
+                    entry.getMessaging()
+                            .forEach(messaging -> {
+                                String senderId = messaging.getSender().getId();
+                                SenderActionDTO senderActionDTO = new SenderActionDTO(
+                                        new Recipient(senderId),
+                                        SenderActionType.typing_on.name());
+                                HttpEntity<SenderActionDTO> entity = new HttpEntity<>(senderActionDTO, headers);
+                                restTemplate.exchange(messenger.getMessagesRequestURI(),
+                                        HttpMethod.POST, entity, Void.class);
+                                try {
+                                    TimeUnit.SECONDS.sleep(2);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                entity.getBody().setSender_action(SenderActionType.typing_off.name());
+                                restTemplate.exchange(messenger.getMessagesRequestURI(),
+                                        HttpMethod.POST, entity, Void.class);
+                            });
+                });
     }
 }

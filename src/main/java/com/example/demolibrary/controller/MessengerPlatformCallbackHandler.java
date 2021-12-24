@@ -2,6 +2,7 @@ package com.example.demolibrary.controller;
 
 import com.example.demolibrary.exception.MessengerVerificationException;
 import com.example.demolibrary.service.SendMessageService;
+import com.example.demolibrary.service.SendSenderActionService;
 import com.example.demolibrary.service.VerifyWebhookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,15 +18,17 @@ public class MessengerPlatformCallbackHandler {
     private static final Logger logger = LoggerFactory.getLogger(MessengerPlatformCallbackHandler.class);
     private SendMessageService sendTextMessageService;
     private SendMessageService sendQuickReplyMessageService;
+    private SendSenderActionService actionService;
     private VerifyWebhookService verifyWebhookService;
 
     public MessengerPlatformCallbackHandler(@Qualifier("sendTextMessageServiceImpl")
                                                     SendMessageService sendTextMessageService,
                                             @Qualifier("sendQuickReplyMessageServiceImpl")
                                                     SendMessageService sendQuickReplyMessageService,
-                                            VerifyWebhookService verifyWebhookService) {
+                                            SendSenderActionService actionService, VerifyWebhookService verifyWebhookService) {
         this.sendTextMessageService = sendTextMessageService;
         this.sendQuickReplyMessageService = sendQuickReplyMessageService;
+        this.actionService = actionService;
         this.verifyWebhookService = verifyWebhookService;
     }
 
@@ -47,7 +50,7 @@ public class MessengerPlatformCallbackHandler {
     public ResponseEntity<String> handleCallback(@RequestBody MessagePayloadDTO messagePayloadDTO,
                                                  @RequestHeader(SIGNATURE_HEADER_NAME) final String signature) {
         logger.info("Received Messenger Platform callback - payload: {} | signature: {}", messagePayloadDTO, signature);
-        sendTextMessageService.sendMessage(messagePayloadDTO);
+        actionService.sendSenderAction(messagePayloadDTO);
         return ResponseEntity.ok("Message was sent");
     }
 }

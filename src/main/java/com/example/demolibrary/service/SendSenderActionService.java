@@ -1,7 +1,7 @@
 package com.example.demolibrary.service;
 
-import com.example.demolibrary.model.senderaction.SenderActionType;
+import com.example.demolibrary.model.receivedmessage.MessagePayloadDTO;
 
 public interface SendSenderActionService {
-    void sendSenderAction(String senderId);
+    void sendSenderAction(MessagePayloadDTO messagePayloadDTO);
 }

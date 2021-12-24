@@ -7,8 +7,6 @@ import com.example.demolibrary.model.sentmessage.Message;
 import com.example.demolibrary.model.sentmessage.Recipient;
 import com.example.demolibrary.model.sentmessage.SendMessageDTO;
 import com.example.demolibrary.service.SendMessageService;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
