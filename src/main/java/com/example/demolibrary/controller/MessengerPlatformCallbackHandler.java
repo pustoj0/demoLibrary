@@ -10,9 +10,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import com.example.demolibrary.model.receivedmessage.*;
-
-import java.util.concurrent.TimeUnit;
-
 import static com.example.demolibrary.MyMessenger.*;
 
 @RestController
@@ -21,6 +18,7 @@ public class MessengerPlatformCallbackHandler {
     private static final Logger logger = LoggerFactory.getLogger(MessengerPlatformCallbackHandler.class);
     private SendMessageService sendTextMessageService;
     private SendMessageService sendQuickReplyMessageService;
+    private SendMessageService sendGenericTemplateService;
     private SendSenderActionService actionService;
     private VerifyWebhookService verifyWebhookService;
 
@@ -28,9 +26,12 @@ public class MessengerPlatformCallbackHandler {
                                                     SendMessageService sendTextMessageService,
                                             @Qualifier("sendQuickReplyMessageServiceImpl")
                                                     SendMessageService sendQuickReplyMessageService,
+                                            @Qualifier("sendGenericTemplateServiceImpl")
+                                                    SendMessageService sendGenericTemplateService,
                                             SendSenderActionService actionService, VerifyWebhookService verifyWebhookService) {
         this.sendTextMessageService = sendTextMessageService;
         this.sendQuickReplyMessageService = sendQuickReplyMessageService;
+        this.sendGenericTemplateService = sendGenericTemplateService;
         this.actionService = actionService;
         this.verifyWebhookService = verifyWebhookService;
     }
@@ -53,13 +54,7 @@ public class MessengerPlatformCallbackHandler {
     public ResponseEntity<String> handleCallback(@RequestBody MessagePayloadDTO messagePayloadDTO,
                                                  @RequestHeader(SIGNATURE_HEADER_NAME) final String signature) {
         logger.info("Received Messenger Platform callback - payload: {} | signature: {}", messagePayloadDTO, signature);
-        actionService.sendSenderAction(messagePayloadDTO);
-        try {
-            TimeUnit.SECONDS.sleep(4);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        sendTextMessageService.sendMessage(messagePayloadDTO);
+        sendGenericTemplateService.sendMessage(messagePayloadDTO);
         return ResponseEntity.ok("Message was sent");
     }
 }
