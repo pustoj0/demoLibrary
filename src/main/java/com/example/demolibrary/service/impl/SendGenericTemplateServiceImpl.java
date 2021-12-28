@@ -34,7 +34,6 @@ public class SendGenericTemplateServiceImpl implements SendMessageService {
                     entry.getMessaging()
                             .forEach(messaging -> {
                                 String senderId = messaging.getSender().getId();
-                                String messageText = messaging.getMessage().getText();
                                 Recipient recipient = new Recipient(senderId);
                                 DefaultAction defaultAction = new DefaultAction("web_url", "https://www.originalcoastclothing.com/", "tall");
                                 Button button1 = new Button("web_url", "https://www.originalcoastclothing.com/", "View Website", "");
