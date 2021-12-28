@@ -5,6 +5,15 @@ public class Messaging {
     public Recipient recipient;
     public long timestamp;
     public Message message;
+    public Postback postback;
+
+    public Postback getPostback() {
+        return postback;
+    }
+
+    public void setPostback(Postback postback) {
+        this.postback = postback;
+    }
 
     public Sender getSender() {
         return sender;
@@ -45,6 +54,8 @@ public class Messaging {
                 ", recipient=" + recipient +
                 ", timestamp=" + timestamp +
                 ", message=" + message +
+                ", postback=" + postback +
                 '}';
     }
 }
+
