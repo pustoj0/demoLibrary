@@ -4,7 +4,7 @@ import com.example.demolibrary.client.GutendexClient;
 import com.example.demolibrary.facebook.dto.receive.library.LibraryDTO;
 import com.example.demolibrary.facebook.dto.send.template.generic.*;
 import com.example.demolibrary.facebook.flow.Flow;
-import com.example.demolibrary.facebook.service.SendGenericTemplateService;
+import com.example.demolibrary.facebook.service.SendMessageService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,14 +15,14 @@ import java.util.stream.Collectors;
 @Component
 @AllArgsConstructor
 public class RecommendationFlow implements Flow {
-    private SendGenericTemplateService templateService;
+    private SendMessageService templateService;
     private GutendexClient gutendexClient;
 
     @Override
     public void run(String recipientId) {
         GenericTemplateDTO genericTemplateDTO
                 = createGenericTemplateForRecommendations(recipientId);
-        templateService.sendGenericTemplate(genericTemplateDTO);
+        templateService.sendMessage(genericTemplateDTO);
     }
 
     private GenericTemplateDTO createGenericTemplateForRecommendations(String recipientId) {

@@ -6,8 +6,7 @@ import com.example.demolibrary.facebook.dto.send.template.generic.GenericTemplat
 import com.example.demolibrary.facebook.dto.send.template.generic.GenericTemplateUtil;
 import com.example.demolibrary.facebook.dto.send.textmessage.TextMessageUtil;
 import com.example.demolibrary.facebook.flow.Flow;
-import com.example.demolibrary.facebook.service.SendGenericTemplateService;
-import com.example.demolibrary.facebook.service.SendTextMessageService;
+import com.example.demolibrary.facebook.service.SendMessageService;
 import com.example.demolibrary.model.Book;
 import com.example.demolibrary.model.Catalog;
 import com.example.demolibrary.model.User;
@@ -22,8 +21,7 @@ import java.util.stream.Collectors;
 @Component
 @AllArgsConstructor
 public class CatalogFlow implements Flow {
-    private SendGenericTemplateService templateService;
-    private SendTextMessageService textMessageService;
+    private SendMessageService messageService;
     private UserService userService;
 
     @Override
@@ -34,9 +32,9 @@ public class CatalogFlow implements Flow {
         GenericTemplateDTO genericTemplateDTO
                 = createCatalogGenericTemplateDTO(books, recipientId);
         if (genericTemplateDTO.getMessage().getAttachment().getPayload().getElements().size() > 0) {
-            templateService.sendGenericTemplate(genericTemplateDTO);
+            messageService.sendMessage(genericTemplateDTO);
         } else {
-            textMessageService.sendTextMessage(
+            messageService.sendMessage(
                     TextMessageUtil.createTextMessage(recipientId, "Your catalog is empty"));
         }
     }

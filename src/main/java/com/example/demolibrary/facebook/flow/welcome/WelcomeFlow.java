@@ -1,16 +1,13 @@
 package com.example.demolibrary.facebook.flow.welcome;
 
-import com.example.demolibrary.client.GutendexClient;
 import com.example.demolibrary.facebook.dto.send.textmessage.TextMessageUtil;
 import com.example.demolibrary.facebook.flow.Flow;
 import com.example.demolibrary.facebook.dto.send.template.button.*;
 import com.example.demolibrary.facebook.dto.send.template.button.Message;
 import com.example.demolibrary.facebook.dto.send.template.button.Recipient;
-import com.example.demolibrary.facebook.service.SendButtonTemplateService;
-import com.example.demolibrary.facebook.service.SendTextMessageService;
+import com.example.demolibrary.facebook.service.SendMessageService;
 import com.example.demolibrary.model.Catalog;
 import com.example.demolibrary.model.User;
-import com.example.demolibrary.service.CatalogService;
 import com.example.demolibrary.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -23,9 +20,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @Log4j2
 public class WelcomeFlow implements Flow {
-    private GutendexClient gutendexClient;
-    private SendTextMessageService sendTextMessageService;
-    private SendButtonTemplateService sendButtonTemplateService;
+    private SendMessageService messageService;
     private UserService userService;
 
     private final String welcomeMessage = "Hi! I'm Libryx, chatbot, created to help you" +
@@ -41,10 +36,10 @@ public class WelcomeFlow implements Flow {
             user.setCatalog(catalog);
             userService.add(user);
         }
-        sendTextMessageService.sendTextMessage(
+        messageService.sendMessage(
                 TextMessageUtil.createTextMessage(recipientId, welcomeMessage));
         ButtonTemplateDTO buttonDTO = createRecommendationButton(recipientId);
-        sendButtonTemplateService.sendButtonTemplate(buttonDTO);
+        messageService.sendMessage(buttonDTO);
     }
 
     private ButtonTemplateDTO createRecommendationButton(String recipientId) {
